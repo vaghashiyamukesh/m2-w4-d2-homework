@@ -1,51 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Food Blog</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="foodblog.css">
-
-    
-
-</head>
-<body>
-    <div id="foodblog-app">
-      <aside id="leftside"></aside>
-      <aside id="rightside"></aside>
-                <div id="foodblog-app" class="container">
-                    <blog-header :title="blog.title"></blog-header>
-                    <main>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <blog-photo :src="blog.photo.src" :alt="blog.photo.alt"></blog-photo>
-                            </div>
-                            <div class="col-md-8">
-                                <h2 class="mt-4">Comments</h2>
-                                <blog-comments :comments="blog.comments"></blog-comments>
-                            </div>
-                        </div>
-                    </main>
-                    <blog-footer :copyright="blog.copyright"></blog-footer>
-                </div>
-
-                <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-                <script src="foodblog.js"></script>
-    </div>
-
-
-<script>
 Vue.component('blog-header', {
     props: ['title'],
-    template: `<header><span>{{ title }}</span></header>`
+    template: `
+    <header>
+      <span>{{ title }}</span>
+      <blog-nav></blog-nav>
+    </header>
+    `
+});
+
+Vue.component('blog-nav', {
+    template: `
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Lifestyles</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Videos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+    </nav>
+    `
 });
 
 Vue.component('blog-photo', {
     props: ['src', 'alt'],
-    template: `<aside id='photos'><img :src='src' :alt='alt' width='180'></aside>`
+    template: `<aside id='photos'><img :src='src' :alt='alt' width='100%' class='img-fluid rounded'></aside>`
 });
 
 Vue.component('blog-comments', {
@@ -87,12 +66,14 @@ Vue.component('blog-comments', {
     },
     template: `
         <section id='blogposts'>
-            <div v-for='comment in comments' class='post'>
-                <img :src="profileImg" alt="profile" class="profile" @click="showAuthor(comment.author)">
-                <span class='author'>{{ comment.author }}</span> —
-                <span class='date'>{{ comment.date }}</span>
-                <span class='reply'>REPLY</span>
-                <p>{{ comment.text }}</p>
+            <div v-for='comment in comments' class='post card mb-3'>
+                <div class="card-body">
+                  <img :src="profileImg" alt="profile" class="profile" @click="showAuthor(comment.author)">
+                  <span class='author font-weight-bold'>{{ comment.author }}</span> —
+                  <span class='date text-muted'>{{ comment.date }}</span>
+                  <span class='reply badge badge-info ml-2'>REPLY</span>
+                  <p class="mt-2">{{ comment.text }}</p>
+                </div>
             </div>
             <div v-if="showBox" class="author-box">
                 <div class="author-box-content">
@@ -100,7 +81,7 @@ Vue.component('blog-comments', {
                     <h2>{{ authorInfo.name }}</h2>
                     <p><b>Foodie Level:</b> {{ authorInfo.level }}</p>
                     <p><b>Bio:</b> {{ authorInfo.bio }}</p>
-                    <button @click="showBox=false">Close</button>
+                    <button class="btn btn-light btn-sm" @click="showBox=false">Close</button>
                 </div>
             </div>
         </section>
@@ -147,6 +128,3 @@ new Vue({
         }
     }
 });
-</script>
-</body>
-</html>

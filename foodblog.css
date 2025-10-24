@@ -1,0 +1,59 @@
+/* Bootstrap overrides and custom styles for Food Blog */
+body {
+    background: #f8f9fa;
+}
+#container {
+    background-color: #fff;
+    border-radius: 0.7em;
+    box-shadow: 0 0 20px #ccc;
+    margin-top: 40px;
+    padding: 2em;
+}
+header {
+    font-family: 'Sacramento', cursive;
+    color: #d89607;
+    background: #f7f7f7;
+    padding: 1em 0 0.5em 0;
+    border-bottom: 1px solid #eee;
+}
+.navbar {
+    margin-bottom: 2em;
+}
+.profile {
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    margin-right:10px;
+    cursor:pointer;
+    vertical-align:middle;
+}
+.author-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30,30,30,0.95);
+    color: #fff;
+    padding: 2em 2em 1em 2em;
+    border-radius: 1em;
+    z-index: 1000;
+    min-width: 300px;
+    box-shadow: 0 0 20px #333;
+    text-align:left;
+}
+.author-box-content {
+    position: relative;
+}
+.author-box .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+footer {
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 2em;
+    color: #888;
+}
